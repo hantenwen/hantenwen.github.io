@@ -1,0 +1,37 @@
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+.header-banner {
+  background-color: #2980b9;
+  color: white;
+  padding: 50px;
+}
+
+.section {
+  padding-bottom: 50px; /* 只保留下邊距 */
+}
+
+.banner {
+  height: 300px; /* 調整 banner 大小 */
+  margin: 0; /* 去除 margin */
+  padding: 0; /* 確保沒有 padding */
+}
+
+.my-container {
+  background-color: #f8f9fa;
+  padding: 30px;
+  width: 60%;
+  max-width: 600px; /* 控制長方形的寬度 */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 30px auto; /* 讓 container 置中 */
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
