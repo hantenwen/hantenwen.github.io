@@ -1,0 +1,31 @@
+#section1 div:first-child {
+    background-image: url("https://hantenwen.github.io/IMG_0195.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#section2 div:first-child {
+    background-image: url("https://hantenwen.github.io/IMG_0198.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#section3 div:first-child {
+    background-image: url("https://hantenwen.github.io/IMG_0207.PNG");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ 
+#section31 div:first-child {
+    background-image: url("https://hantenwen.github.io/185046.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
