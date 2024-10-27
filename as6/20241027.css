@@ -1,0 +1,9 @@
+#horizontal {
+	position : relative;
+	display : inline-block;
+	left : 0px;
+	width : auto;
+}
+body {
+		overflow-x: hidden;
+}
