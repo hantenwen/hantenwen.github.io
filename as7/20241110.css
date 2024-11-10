@@ -1,0 +1,21 @@
+.section {
+    position: relative;
+    width: 100%;
+}
+
+.video-wrapper {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#video1, #video2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
