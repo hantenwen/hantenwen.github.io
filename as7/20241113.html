@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>垂直時間軸</title>
+    <title>動畫時間軸敘事</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
+            color: #333;
         }
 
         .timeline-container {
@@ -27,8 +28,30 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: #2196F3;
+            background: #3498db;
             transform: translateX(-50%);
+        }
+
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3498db 50%, transparent 50%);
+            background-size: 100% 40px;
+            animation: lineProgress 2s linear infinite;
+        }
+
+        @keyframes lineProgress {
+            0% {
+                background-position: 0 40px;
+            }
+            100% {
+                background-position: 0 0;
+            }
         }
 
         .timeline-item {
@@ -36,22 +59,54 @@
             position: relative;
             padding: 40px 0;
             opacity: 0;
-            transform: translateY(100px);
-            transition: all 0.8s ease;
         }
 
         .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
+            animation: itemAppear 1.2s ease forwards;
+        }
+
+        @keyframes itemAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            60% {
+                transform: translateY(-20px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .timeline-content {
             width: 40%;
-            padding: 20px;
+            padding: 25px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.1));
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .timeline-item:nth-child(odd) .timeline-content {
@@ -62,42 +117,70 @@
             margin-left: 5%;
         }
 
-        .timeline-content::before {
-            content: '';
+        .timeline-dot {
             position: absolute;
             top: 50%;
+            left: 50%;
             width: 20px;
             height: 20px;
-            background: #2196F3;
+            background: #3498db;
             border-radius: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            left: -60px;
-            transform: translateY(-50%);
+        .timeline-item.visible .timeline-dot {
+            animation: dotPulse 1.5s ease-out infinite;
         }
 
-        .timeline-item:nth-child(even) .timeline-content::before {
-            right: -60px;
-            transform: translateY(-50%);
+        @keyframes dotPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
         }
 
         .timeline-date {
             font-size: 0.9em;
-            color: #2196F3;
+            color: #3498db;
             margin-bottom: 8px;
+            position: relative;
         }
 
         .timeline-title {
-            font-size: 1.2em;
-            margin-bottom: 8px;
-            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            position: relative;
         }
 
         .timeline-text {
             color: #666;
             line-height: 1.6;
+            position: relative;
         }
+
+        .timeline-item.visible .timeline-date,
+        .timeline-item.visible .timeline-title,
+        .timeline-item.visible .timeline-text {
+            animation: contentSlide 0.8s ease forwards;
+        }
+
+        @keyframes contentSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -105,82 +188,92 @@
         <div class="timeline-line"></div>
         
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2020年1月</div>
-                <h3 class="timeline-title">項目創立</h3>
-                <p class="timeline-text">我們的團隊開始了這個激動人心的旅程，致力於創造更好的用戶體驗。</p>
+                <div class="timeline-date">2020年春季</div>
+                <h3 class="timeline-title">故事的開始</h3>
+                <p class="timeline-text">在櫻花紛飛的季節，我們啟動了這個充滿夢想的計畫。每一個細節都承載著無限的可能。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2020年6月</div>
-                <h3 class="timeline-title">第一個里程碑</h3>
-                <p class="timeline-text">成功完成了第一個重要階段，獲得了初步的市場反饋。</p>
+                <div class="timeline-date">2020年夏季</div>
+                <h3 class="timeline-title">成長的脈動</h3>
+                <p class="timeline-text">炎炎夏日中，團隊的熱情持續燃燒，每一次的嘗試都讓我們更接近目標。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2021年3月</div>
-                <h3 class="timeline-title">技術突破</h3>
-                <p class="timeline-text">實現了關鍵技術突破，大幅提升了系統性能。</p>
+                <div class="timeline-date">2020年秋季</div>
+                <h3 class="timeline-title">突破與創新</h3>
+                <p class="timeline-text">金黃的落葉中，我們實現了關鍵性的技術突破，為未來鋪設了嶄新的道路。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2021年9月</div>
-                <h3 class="timeline-title">用戶增長</h3>
-                <p class="timeline-text">用戶數量突破100萬，標誌著項目進入快速發展階段。</p>
+                <div class="timeline-date">2021年冬季</div>
+                <h3 class="timeline-title">凝聚與蛻變</h3>
+                <p class="timeline-text">寒冷的冬季裡，團隊的凝聚力達到了新的高峰，共同創造了令人驚嘆的成果。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2022年2月</div>
-                <h3 class="timeline-title">國際化擴展</h3>
-                <p class="timeline-text">開始向國際市場擴展，建立全球合作夥伴網絡。</p>
+                <div class="timeline-date">2021年春季</div>
+                <h3 class="timeline-title">綻放時刻</h3>
+                <p class="timeline-text">春暖花開之際，我們的努力終於開花結果，獲得了市場的廣泛認可。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2022年8月</div>
-                <h3 class="timeline-title">產品升級</h3>
-                <p class="timeline-text">推出2.0版本，引入多項創新功能。</p>
+                <div class="timeline-date">2021年夏季</div>
+                <h3 class="timeline-title">擴展視野</h3>
+                <p class="timeline-text">驕陽似火的季節，我們開始向更廣闊的領域進發，探索無限可能。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2023年1月</div>
-                <h3 class="timeline-title">榮獲獎項</h3>
-                <p class="timeline-text">獲得年度最佳創新產品獎，得到業界廣泛認可。</p>
+                <div class="timeline-date">2021年秋季</div>
+                <h3 class="timeline-title">豐碩成果</h3>
+                <p class="timeline-text">收穫的季節，我們不僅達成了預期目標，更收穫了寶貴的經驗與友誼。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2023年7月</div>
-                <h3 class="timeline-title">社區建設</h3>
-                <p class="timeline-text">建立活躍的用戶社區，促進用戶交流與互動。</p>
+                <div class="timeline-date">2022年冬季</div>
+                <h3 class="timeline-title">沉澱與思考</h3>
+                <p class="timeline-text">在寧靜的冬日裡，我們回顧過往，規劃未來，準備迎接新的挑戰。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2023年12月</div>
-                <h3 class="timeline-title">AI整合</h3>
-                <p class="timeline-text">成功整合AI技術，提供智能化服務體驗。</p>
+                <div class="timeline-date">2022年春季</div>
+                <h3 class="timeline-title">新的篇章</h3>
+                <p class="timeline-text">春風徐來，我們以嶄新的面貌開啟新的篇章，繼續追逐夢想的腳步。</p>
             </div>
         </div>
 
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="timeline-date">2024年3月</div>
-                <h3 class="timeline-title">未來展望</h3>
-                <p class="timeline-text">計劃推出更多創新功能，持續提升用戶體驗。</p>
+                <div class="timeline-date">2022年夏季</div>
+                <h3 class="timeline-title">未來可期</h3>
+                <p class="timeline-text">炎夏將至，我們懷著滿腔熱忱，繼續書寫屬於我們的精彩故事。</p>
             </div>
         </div>
     </div>
