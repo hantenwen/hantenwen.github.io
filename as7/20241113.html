@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>垂直時間軸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .timeline-container {
+            min-height: 300vh;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #2196F3;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            width: 100%;
+            position: relative;
+            padding: 40px 0;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-content {
+            width: 40%;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 5%;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #2196F3;
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -60px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -60px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-date {
+            font-size: 0.9em;
+            color: #2196F3;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .timeline-text {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2020年1月</div>
+                <h3 class="timeline-title">項目創立</h3>
+                <p class="timeline-text">我們的團隊開始了這個激動人心的旅程，致力於創造更好的用戶體驗。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2020年6月</div>
+                <h3 class="timeline-title">第一個里程碑</h3>
+                <p class="timeline-text">成功完成了第一個重要階段，獲得了初步的市場反饋。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2021年3月</div>
+                <h3 class="timeline-title">技術突破</h3>
+                <p class="timeline-text">實現了關鍵技術突破，大幅提升了系統性能。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2021年9月</div>
+                <h3 class="timeline-title">用戶增長</h3>
+                <p class="timeline-text">用戶數量突破100萬，標誌著項目進入快速發展階段。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2022年2月</div>
+                <h3 class="timeline-title">國際化擴展</h3>
+                <p class="timeline-text">開始向國際市場擴展，建立全球合作夥伴網絡。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2022年8月</div>
+                <h3 class="timeline-title">產品升級</h3>
+                <p class="timeline-text">推出2.0版本，引入多項創新功能。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2023年1月</div>
+                <h3 class="timeline-title">榮獲獎項</h3>
+                <p class="timeline-text">獲得年度最佳創新產品獎，得到業界廣泛認可。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2023年7月</div>
+                <h3 class="timeline-title">社區建設</h3>
+                <p class="timeline-text">建立活躍的用戶社區，促進用戶交流與互動。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2023年12月</div>
+                <h3 class="timeline-title">AI整合</h3>
+                <p class="timeline-text">成功整合AI技術，提供智能化服務體驗。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2024年3月</div>
+                <h3 class="timeline-title">未來展望</h3>
+                <p class="timeline-text">計劃推出更多創新功能，持續提升用戶體驗。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkVisibility() {
+            const items = document.querySelectorAll('.timeline-item');
+            
+            items.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight * 0.85) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+    </script>
+</body>
+</html>
