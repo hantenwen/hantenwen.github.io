@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>環境意識網頁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Banner Section */
+        #banner {
+            background: #87CEEB;
+        }
+
+        .mountain {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            bottom: 30%;
+            background: #8B4513;
+            clip-path: polygon(0% 100%, 30% 40%, 50% 80%, 70% 30%, 100% 100%);
+            z-index: 1;
+            transition: transform 0.1s ease-out;
+        }
+
+        .factory {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+            background: #555;
+            z-index: 2;
+        }
+
+        .factory:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 40%;
+            width: 40px;
+            height: 40px;
+            background: #333;
+        }
+
+        .smoke {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #666;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .smoke.animate {
+            animation: rise 2s infinite;
+        }
+
+        .car {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            width: 120px;
+            height: 60px;
+            background: #FF0000;
+            z-index: 3;
+            transition: transform 0.1s ease-out;
+        }
+
+        .car:before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .car:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        /* Section 2 */
+        #section2 {
+            background: #666;
+        }
+
+        .window {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #FFF;
+            z-index: 2;
+        }
+
+        .person {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            width: 40px;
+            height: 80px;
+            background: #000;
+            z-index: 3;
+            transition: transform 0.1s ease-out;
+        }
+
+        .person.coughing {
+            animation: cough 0.5s ease-in-out infinite;
+        }
+
+        .moving-smoke {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(102, 102, 102, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 2;
+            transition: transform 0.1s ease-out;
+        }
+
+        .moving-smoke.animate {
+            animation: moveSmoke 3s linear infinite;
+        }
+
+        /* Section 4 */
+        #section4 {
+            background: #98FB98;
+        }
+
+        .clean-mountain {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            bottom: 30%;
+            background: #228B22;
+            clip-path: polygon(0% 100%, 30% 40%, 50% 80%, 70% 30%, 100% 100%);
+            z-index: 1;
+            transition: transform 0.1s ease-out;
+        }
+
+        .bus {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            width: 160px;
+            height: 80px;
+            background: #4169E1;
+            z-index: 3;
+            transition: transform 0.1s ease-out;
+        }
+
+        .bus:before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .bus:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .bus-window {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            width: 120px;
+            height: 30px;
+            background: #ADD8E6;
+        }
+
+        .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #333;
+    white-space: nowrap;
+    transition: transform 0.1s ease-out; /* 加入過渡效果 */
+    z-index: 10; /* 確保文字在畫面最上層 */
+}
+
+
+        /* Animations */
+        @keyframes rise {
+            from { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            }
+            to { 
+                transform: translateY(-100px) scale(2); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes cough {
+            0%, 100% { transform: rotate(0deg) translateX(0); }
+            25% { transform: rotate(-5deg) translateX(-2px); }
+            75% { transform: rotate(5deg) translateX(2px); }
+        }
+
+        @keyframes moveSmoke {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100px) translateY(-50px);
+                opacity: 0;
+            }
+        }
+        .clean-mountain, .bus, .mountain, .car {
+    transition: transform 0.1s ease-out;
+}
+
+    </style>
+</head>
+<body>
+    <div id="banner" class="section">
+        <div class="mountain"></div>
+        <div class="factory">
+            <div class="smoke"></div>
+            <div class="smoke" style="left: 40px;"></div>
+            <div class="smoke" style="left: 80px;"></div>
+        </div>
+        <div class="car"></div>
+    </div>
+
+    <div id="section2" class="section">
+        <div class="factory">
+            <div class="smoke"></div>
+            <div class="smoke" style="left: 40px;"></div>
+        </div>
+        <div class="window" style="left: 40%; top: 40%;"></div>
+        <div class="window" style="left: 60%; top: 40%;"></div>
+        <div class="person"></div>
+        <div class="moving-smoke"></div>
+        <div class="moving-smoke" style="animation-delay: 1s;"></div>
+        <div class="moving-smoke" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div id="section3" class="section">
+    </div>
+
+    <div id="section4" class="section">
+        <div class="clean-mountain"></div>
+        <div class="factory"></div>
+        <div class="bus">
+            <div class="bus-window"></div>
+        </div>
+        <div class="text">降低空汙</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(window).on('scroll', function () {
+            const scrollY = $(this).scrollTop(); // 取得目前滾動的高度
+    
+            // --- Banner Section ---
+            const $bannerMountain = $('#banner .mountain');
+            const $bannerCar = $('#banner .car');
+    
+            if ($bannerMountain.length && $bannerCar.length) {
+                $bannerMountain.css('transform', `translateX(-${scrollY * 0.3}px)`); // 山緩慢左移
+                $bannerCar.css('transform', `translateX(-${scrollY * 0.5}px)`);     // 車快速左移
+            }
+    
+            // --- Section 4 ---
+            const $cleanMountain = $('#section4 .clean-mountain');
+            const $bus = $('#section4 .bus');
+            const section4Top = $('#section4').offset().top; // Section 4 的起始位置
+            const windowHeight = $(window).height();        // 瀏覽器視窗高度
+            const scrollBottom = scrollY + windowHeight;    // 當前滾動的底部位置
+    
+            // 檢查是否進入 Section 4 範圍
+            if (scrollBottom > section4Top) {
+                const offset = scrollBottom - section4Top; // 計算相對滾動距離
+                $cleanMountain.css('transform', `translateX(-${offset * 0.3}px)`); // 山緩慢左移
+                $bus.css('transform', `translateX(-${offset * 0.5}px)`);          // 車快速左移
+            } else {
+                // 如果未滾動到 Section 4，確保初始狀態
+                $cleanMountain.css('transform', 'translateX(0)');
+                $bus.css('transform', 'translateX(0)');
+            }
+            $(window).on('scroll', function () {
+    const scrollY = $(this).scrollTop(); // 獲取滾動的 Y 軸距離
+
+    // --- Section 4 ---
+    const $cleanMountain = $('#section4 .clean-mountain');
+    const $bus = $('#section4 .bus');
+    const $text = $('#section4 .text'); // 取得文字元素
+    const section4Top = $('#section4').offset().top;
+    const windowHeight = $(window).height();
+    const scrollBottom = scrollY + windowHeight;
+
+    // 檢查是否進入 Section 4 範圍
+    if (scrollBottom > section4Top) {
+        const offset = scrollBottom - section4Top; // 計算滾動的相對距離
+        $cleanMountain.css('transform', `translateX(-${offset * 0.3}px)`); // 山緩慢左移
+        $bus.css('transform', `translateX(-${offset * 0.5}px)`);          // 車快速左移
+        $text.css('transform', `translateX(-${offset * 0.7}px)`);         // 文字更快左移
+    } else {
+        // 如果未滾動到 Section 4，重置初始狀態
+        $cleanMountain.css('transform', 'translateX(0)');
+        $bus.css('transform', 'translateX(0)');
+        $text.css('transform', 'translateX(0)');
+    }
+});
+
+        });
+    </script>
+    
+
+    
+    
+
+</body>
+</html>
